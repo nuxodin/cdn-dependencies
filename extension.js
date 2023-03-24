@@ -245,7 +245,7 @@ function xxGet(url, data) {
 
 function xGet(url) {
 	return new Promise((resolve, reject) => {
-		http.get(url, function(res){
+		https.get(url, function(res){
 			var body = '';
 			res.on('data', function(chunk){
 				body += chunk;
