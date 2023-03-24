@@ -2,8 +2,9 @@
   "name": "cdn-dependencies",
   "displayName": "CDN dependencies",
   "description": "check imports for new versions",
+  "version": "0.0.3",
+  "publisher": "TobiasBuschor",
   "repository": "https://github.com/nuxodin/cdn-dependencies",
-  "version": "0.0.2",
   "engines": {
     "vscode": "^1.76.0"
   },
