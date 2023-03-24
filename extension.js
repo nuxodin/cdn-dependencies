@@ -200,35 +200,41 @@ function regEscape(str) {
 
 
 
-const https = require('https');
+const https = require('https')
 
-function xFetch(url){
+async function xGet(url, data) {
+  const dataString = JSON.stringify(data)
+  const options = {
+    //method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      //'Content-Length': dataString.length,
+    },
+    timeout: 1000, // in ms
+  }
 
-	const postData = JSON.stringify({
-		'msg' : 'Hello World!'
-	});
+  return new Promise((resolve, reject) => {
+    const req = https.request(url, options, (res) => {
+      if (res.statusCode < 200 || res.statusCode > 299) {
+        return reject(new Error(`HTTP status code ${res.statusCode}`))
+      }
 
-	var options = {
-	  method: 'POST',
-	  headers: {
-		   'Content-Type': 'application/x-www-form-urlencoded',
-		   'Content-Length': postData.length
-		 }
-	};
-
-	const req = https.request(url, options, (res) => {
-	  console.log('statusCode:', res.statusCode);
-	  console.log('headers:', res.headers);
-
-	  res.on('data', (d) => {
-		process.stdout.write(d);
-	  });
-	});
-
-	req.on('error', (e) => {
-	  console.error(e);
-	});
-
-	req.write(postData);
-	req.end();
+      const body = []
+      res.on('data', (chunk) => body.push(chunk))
+      res.on('end', () => {
+        const resString = Buffer.concat(body).toString();
+		const obj = JSON.parse(resString);
+        resolve(obj)
+      })
+    })
+    req.on('error', (err) => {
+      reject(err)
+    })
+    req.on('timeout', () => {
+      req.destroy()
+      reject(new Error('Request time out'))
+    })
+    //req.write(dataString);
+    req.end();
+  });
 }
