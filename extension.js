@@ -196,3 +196,39 @@ const invalidImportDecorationType = vscode.window.createTextEditorDecorationType
 function regEscape(str) {
 	return str.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
 }
+
+
+
+
+const https = require('https');
+
+function xFetch(url){
+
+	const postData = JSON.stringify({
+		'msg' : 'Hello World!'
+	});
+
+	var options = {
+	  method: 'POST',
+	  headers: {
+		   'Content-Type': 'application/x-www-form-urlencoded',
+		   'Content-Length': postData.length
+		 }
+	};
+
+	const req = https.request(url, options, (res) => {
+	  console.log('statusCode:', res.statusCode);
+	  console.log('headers:', res.headers);
+
+	  res.on('data', (d) => {
+		process.stdout.write(d);
+	  });
+	});
+
+	req.on('error', (e) => {
+	  console.error(e);
+	});
+
+	req.write(postData);
+	req.end();
+}
