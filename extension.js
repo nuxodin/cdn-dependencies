@@ -207,7 +207,7 @@ function regEscape(str) {
 
 const https = require('https')
 
-async function xGet(url, data) {
+function xxGet(url, data) {
   const dataString = JSON.stringify(data)
   const options = {
     //method: 'POST',
@@ -243,18 +243,18 @@ async function xGet(url, data) {
   });
 }
 
-function xGet(url, ok, fail) {
-	http.get(url, function(res){
-		var body = '';
-		res.on('data', function(chunk){
-			body += chunk;
+function xGet(url) {
+	return new Promise((resolve, reject) => {
+		http.get(url, function(res){
+			var body = '';
+			res.on('data', function(chunk){
+				body += chunk;
+			});
+			res.on('end', function(){
+				resolve(JSON.parse(body));
+			});
+		}).on('error', function(e){
+			reject(e)
 		});
-		res.on('end', function(){
-			var fbResponse = JSON.parse(body);
-			console.log("Got a response: ", fbResponse.picture);
-		});
-	}).on('error', function(e){
-		  console.log("Got an error: ", e);
 	});
-
 }
