@@ -1,5 +1,6 @@
 const vscode = require('vscode');
 const fs = require('fs');
+const https = require('https')
 
 const githubCdns = [
 	'https://cdn.jsdelivr.net/gh/',
@@ -202,11 +203,6 @@ function regEscape(str) {
 	return str.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
 }
 
-
-
-
-const https = require('https')
-
 function xGet(url) {
 	return new Promise((resolve, reject) => {
 		// add user-agent header
@@ -214,8 +210,7 @@ function xGet(url) {
 			'User-Agent': 'vscode-extension',
 		};
 		https.get(url, {headers}, function(res){
-		//https.get(url, function(res){
-			var body = '';
+			let body = '';
 			res.on('data', function(chunk){
 				body += chunk;
 			});
@@ -224,9 +219,7 @@ function xGet(url) {
 					const obj = JSON.parse(body);
 					resolve(obj);
 				} catch (e) {
-					console.log(body)
 					reject(e);
-					return;
 				}
 			});
 		}).on('error', function(e){
