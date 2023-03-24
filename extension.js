@@ -97,7 +97,6 @@ function documentFindOutdatedImports(document) {
 }
 
 async function checkUri(uri) {
-	const {default: fetch} = await import('node-fetch');
 	const textDocument = await vscode.workspace.openTextDocument(uri);
 	const findings = await documentFindOutdatedImports(textDocument);
 	findings.forEach((finding) => {
