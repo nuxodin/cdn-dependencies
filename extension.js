@@ -148,7 +148,7 @@ function getGithubVersion(user, repo) {
 			if (!release.tag_name) return;
 			const version = release.tag_name.replace('v', '');
 			return version;
-		} catch (e) { console.log(e); return false; }
+		} catch (e) { console.log(`failed https://api.github.com/repos/${user}/${repo}/releases/latest`); return false; }
 	});
 }
 function getNpmVersion(packageName) {
@@ -225,7 +225,6 @@ async function xGet(url, data) {
       res.on('data', (chunk) => body.push(chunk))
       res.on('end', () => {
         const resString = Buffer.concat(body).toString();
-		console.log(resString);
 		const obj = JSON.parse(resString);
         resolve(obj)
       })
