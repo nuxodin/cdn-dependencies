@@ -1,8 +1,5 @@
-// const vscode = require('vscode');
-// const fs = require('fs');
-
-import vscode from 'vscode';
-import fs from 'fs';
+const vscode = require('vscode');
+const fs = require('fs');
 
 const githubCdns = [
 	'https://cdn.jsdelivr.net/gh/',
