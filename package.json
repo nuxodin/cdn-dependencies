@@ -2,7 +2,7 @@
   "name": "cdn-dependencies",
   "displayName": "CDN dependencies",
   "description": "check imports for new versions",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "publisher": "TobiasBuschor",
   "repository": "https://github.com/nuxodin/cdn-dependencies",
   "engines": {
