@@ -209,7 +209,12 @@ const https = require('https')
 
 function xGet(url) {
 	return new Promise((resolve, reject) => {
-		https.get(url, function(res){
+		// add user-agent header
+		const headers = {
+			'User-Agent': 'vscode-extension',
+		};
+		https.get(url, {headers}, function(res){
+		//https.get(url, function(res){
 			var body = '';
 			res.on('data', function(chunk){
 				body += chunk;
