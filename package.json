@@ -13,6 +13,7 @@
   ],
   "activationEvents": [],
   "main": "./extension.js",
+  "type": "module",
   "contributes": {
     "commands": [{
       "command": "cdn-dependencies.check-workspace",
