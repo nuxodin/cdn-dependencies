@@ -222,7 +222,7 @@ async function xGet(url, data) {
         return reject(new Error(`HTTP status code ${res.statusCode}`))
       }
 
-      const body = []
+      const body = [];
       res.on('data', (chunk) => body.push(chunk))
       res.on('end', () => {
         const resString = Buffer.concat(body).toString();
