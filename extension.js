@@ -148,7 +148,7 @@ function getGithubVersion(user, repo) {
 			if (!release.tag_name) return;
 			const version = release.tag_name.replace('v', '');
 			return version;
-		} catch (e) { console.log(`failed https://api.github.com/repos/${user}/${repo}/releases/latest`); return false; }
+		} catch (e) { console.log(`failed https://api.github.com/repos/${user}/${repo}/releases/latest`, e.message); return false; }
 	});
 }
 function getNpmVersion(packageName) {
@@ -160,7 +160,7 @@ function getNpmVersion(packageName) {
 			if (!release) return;
 			if (!release.version) return;
 			return release.version;
-		} catch (e) { console.log(`failed: https://registry.npmjs.org/${packageName}/latest`); return false; }
+		} catch (e) { console.log(`failed: https://registry.npmjs.org/${packageName}/latest`, e.message); return false; }
 	});
 }
 
