@@ -225,6 +225,7 @@ async function xGet(url, data) {
       res.on('data', (chunk) => body.push(chunk))
       res.on('end', () => {
         const resString = Buffer.concat(body).toString();
+		console.log(resString);
 		const obj = JSON.parse(resString);
         resolve(obj)
       })
