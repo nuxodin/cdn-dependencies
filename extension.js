@@ -142,11 +142,13 @@ function getGithubVersion(user, repo) {
 	return getVersionCache('github', user+'/'+repo, async () => {
 		// const {default: fetch} = await import('node-fetch');
 		// const release = await fetch(`https://api.github.com/repos/${user}/${repo}/releases/latest`, {method:'GET'}).then(res=>res.json());
-		const release = await xGet(`https://api.github.com/repos/${user}/${repo}/releases/latest`);
-		if (!release) return;
-		if (!release.tag_name) return;
-		const version = release.tag_name.replace('v', '');
-		return version;
+		try {
+			const release = await xGet(`https://api.github.com/repos/${user}/${repo}/releases/latest`);
+			if (!release) return;
+			if (!release.tag_name) return;
+			const version = release.tag_name.replace('v', '');
+			return version;
+		} catch (e) { console.log(e); return false; }
 	});
 }
 function getNpmVersion(packageName) {
