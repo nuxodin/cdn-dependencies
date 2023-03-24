@@ -215,7 +215,14 @@ function xGet(url) {
 				body += chunk;
 			});
 			res.on('end', function(){
-				resolve(JSON.parse(body));
+				try {
+					const obj = JSON.parse(body);
+					resolve(obj);
+				} catch (e) {
+					console.log(body)
+					reject(e);
+					return;
+				}
 			});
 		}).on('error', function(e){
 			reject(e)
