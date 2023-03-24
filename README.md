@@ -1,5 +1,5 @@
 # CDN dependencies
-Your dependencies stalker
+Your dependency stalker
 
 Are you tired of manually checking for updates to your project's CDN dependencies? Do you wish there was an extension that could do the job for you?  
 Look no further than CDN Dependencies - the ultimate dependencies stalker! With this extension, you'll always be the version tiger - on the prowl for the latest updates to your project's CDN dependencies.
