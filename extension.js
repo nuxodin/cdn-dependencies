@@ -155,10 +155,12 @@ function getNpmVersion(packageName) {
 	return getVersionCache('npm', packageName, async () => {
 		// const {default: fetch} = await import('node-fetch');
 		// const release = await fetch(`https://registry.npmjs.org/${packageName}/latest`).then(res=>res.json());
-		const release = await xGet(`https://registry.npmjs.org/${packageName}/latest`);
-		if (!release) return;
-		if (!release.version) return;
-		return release.version;
+		try {
+			const release = await xGet(`https://registry.npmjs.org/${packageName}/latest`);
+			if (!release) return;
+			if (!release.version) return;
+			return release.version;
+		} catch (e) { console.log(`failed: https://registry.npmjs.org/${packageName}/latest`); return false; }
 	});
 }
 
