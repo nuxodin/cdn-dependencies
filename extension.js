@@ -221,7 +221,6 @@ async function xGet(url, data) {
       if (res.statusCode < 200 || res.statusCode > 299) {
         return reject(new Error(`HTTP status code ${res.statusCode}`))
       }
-
       const body = [];
       res.on('data', (chunk) => body.push(chunk))
       res.on('end', () => {
