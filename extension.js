@@ -141,8 +141,9 @@ async function checkWorkspace(){
 /* version cache */
 function getGithubVersion(user, repo) {
 	return getVersionCache('github', user+'/'+repo, async () => {
-		const {default: fetch} = await import('node-fetch');
-		const release = await fetch(`https://api.github.com/repos/${user}/${repo}/releases/latest`, {method:'GET'}).then(res=>res.json());
+		// const {default: fetch} = await import('node-fetch');
+		// const release = await fetch(`https://api.github.com/repos/${user}/${repo}/releases/latest`, {method:'GET'}).then(res=>res.json());
+		const release = await xGet(`https://api.github.com/repos/${user}/${repo}/releases/latest`);
 		if (!release) return;
 		if (!release.tag_name) return;
 		const version = release.tag_name.replace('v', '');
@@ -151,8 +152,9 @@ function getGithubVersion(user, repo) {
 }
 function getNpmVersion(packageName) {
 	return getVersionCache('npm', packageName, async () => {
-		const {default: fetch} = await import('node-fetch');
-		const release = await fetch(`https://registry.npmjs.org/${packageName}/latest`).then(res=>res.json());
+		// const {default: fetch} = await import('node-fetch');
+		// const release = await fetch(`https://registry.npmjs.org/${packageName}/latest`).then(res=>res.json());
+		const release = await xGet(`https://registry.npmjs.org/${packageName}/latest`);
 		if (!release) return;
 		if (!release.version) return;
 		return release.version;
