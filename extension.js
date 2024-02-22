@@ -5,6 +5,7 @@ const https = require('https')
 const githubCdns = [
 	'https://cdn.jsdelivr.net/gh/',
 	'http://gcdn.li/',
+	//'https://esm.sh/gh/', // u1ui/ico.el@v3.6.1/ico.js // todo: version is "v1.1.1" and not "1.1.1"
 ];
 const npmCdns = [
 	'https://cdn.jsdelivr.net/npm/',
